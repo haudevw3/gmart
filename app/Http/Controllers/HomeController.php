@@ -6,6 +6,9 @@ class HomeController {
     {
         echo "HomeController";
     }
-}
 
-echo "testHomeController";
+    public function index()
+    {
+        echo "123";
+    }
+}

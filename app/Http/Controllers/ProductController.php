@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 class ProductController {
     public function __construct()
     {
+        // echo "ProductController";
+    }
+
+    public function index()
+    {
         echo "ProductController";
     }
-}
 
-echo "testProductController";
+    public function list()
+    {
+        echo "DetailProductController";
+    }
+}

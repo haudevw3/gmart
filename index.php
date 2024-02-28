@@ -1,17 +1,17 @@
 <?php
 require_once './vendor/autoload.php';
+require_once './core/Route/config.php';
 
-use App\Http\Controllers\AppController;
+use Core\Route\Route;
+// use App\Http\Controllers\AppController;
 use App\Http\Controllers\HomeController;
 
-$app = new AppController();
-// $home = new HomeController();
-// $home = new HomeController();
-// $home = new HomeController();
-// $test = new HomeController();
-// echo $app->getController();
-// $app->handleUrl();
+$route = new Route();
+// $controller = $route->getController();
+// $test = "App\\Http\\Controllers\\" . $controller;
+// $ob = new $test;
 
+// $app = new AppController();
 // $db = new Database();
 // $temp = $db->query("SELECT * FROM users", [], true);
 // $data = [

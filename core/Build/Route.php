@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Route;
+namespace Core\Build;
 
 class Route
 {
@@ -36,13 +36,15 @@ class Route
         $urlAnalysis = array_values($urlAnalysis);
         if (!empty($routes[$urlAnalysis[0]])) :
             $this->module = $urlAnalysis[0];
-            $controller = $routes[$urlAnalysis[0]]['name'];
+            $controller = $routes[$urlAnalysis[0]]['controller'];
             unset($urlAnalysis[0]);
             $this->url = implode('/', $urlAnalysis);
             return $this->controller = $controller;
         else :
             $this->module = null;
+            $this->controller = null;
         endif;
+        return;
     }
 
     public function handleUrl()

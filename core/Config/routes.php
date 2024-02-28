@@ -6,17 +6,17 @@
  *      tên phương thức
  * ]
  */
-$pathApp = 'app/Http/Controllers/';
+$pathApp = 'app/Http/Controller/';
 $routes = [
     'trang-chu' => [
         'path' => $pathApp,
-        'name' => 'HomeController',
+        'controller' => 'HomeController',
         'method' => 'index'
     ],
 
     'san-pham' => [
         'path' => $pathApp,
-        'name' => 'ProductController',
+        'controller' => 'ProductController',
         'method' => 'index',
         
         'danh-sach' => [

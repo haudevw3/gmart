@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controller;
 
 class HomeController {
     public function __construct()

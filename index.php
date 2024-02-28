@@ -1,12 +1,16 @@
 <?php
 require_once './vendor/autoload.php';
-require_once './core/Route/config.php';
+require_once './core/Config/routes.php';
+require_once './core/Config/database.php';
 
-use Core\Route\Route;
-// use App\Http\Controllers\AppController;
-use App\Http\Controllers\HomeController;
+use Core\Build\Database;
+use Core\Build\Route;
 
-$route = new Route();
+// $route = new Route();
+// $database = new Database();
+// $database1 = new Database();
+// var_dump($database);
+// var_dump($database1);
 // $controller = $route->getController();
 // $test = "App\\Http\\Controllers\\" . $controller;
 // $ob = new $test;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Database;
+namespace Core\Build;
 
 use \PDO;
 use \Exception;
@@ -19,10 +19,10 @@ class Database
     function __construct()
     {
         try {
-            if (class_exists("PDO")) :
-                $dsn = $this->drive . ":dbname=" . $this->dbName . ";host=" . $this->host;
+            if (class_exists('PDO')) :
+                $dsn = $this->drive . ':dbname=' . $this->dbName . ';host=' . $this->host;
                 $options = [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ];
                 if (self::$conn == NULL) :
@@ -51,8 +51,8 @@ class Database
             else
                 $query = $statement->execute($data);
         } catch (Exception $exception) {
-            echo $exception->getMessage() . "<br/>";
-            echo "<b>SQL Query: $this->sql</b>";
+            echo $exception->getMessage() . '<br/>';
+            echo '<b>SQL Query: $this->sql</b>';
             die();
         }
         if ($status && $query)

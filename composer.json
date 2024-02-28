@@ -1,0 +1,11 @@
+{
+    "name": "php/php",
+    "description": "The PHP",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}

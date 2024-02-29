@@ -3,8 +3,11 @@ require_once './vendor/autoload.php';
 require_once './core/Config/routes.php';
 require_once './core/Config/database.php';
 
-use Core\Build\Database;
+use Core\Build\DB;
 use Core\Build\Route;
+
+var_dump(DB::table('users')->where('username', '=', 'nguyenhau')->get());
+
 
 // $route = new Route();
 // $database = new Database();

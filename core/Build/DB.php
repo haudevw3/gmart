@@ -5,19 +5,26 @@ namespace Core\Build;
 use \PDO;
 use \Exception;
 
-// The singleton desgin parttern
+// The singleton parttern
 
 class DB
 {
+    // Config host
     private $host = HOST;
     private $user = USER;
     private $pass = PASS;
     private $dbName = DB_NAME;
     private $drive = DRIVE;
+    private $conn = null;
+
+    // Query builder
     private $sql = null;
     private $table = null;
-    private static $conn = null;
+    private $select = null;
+    private $where = null;
+
     private static $_table = null;
+    private static $_select = null;
     private static $instance = null;
 
     private function __construct()
@@ -29,13 +36,14 @@ class DB
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ];
-                self::$conn = new PDO($dsn, $this->user, $this->pass, $options);
+                $this->conn = new PDO($dsn, $this->user, $this->pass, $options);
             endif;
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
         }
-        $this->table = self::$_table;
+        $this->table = &self::$_table;
+        $this->select = &self::$_select;
     }
 
     public static function getInstance()
@@ -53,39 +61,63 @@ class DB
          */
         $query = null;
         try {
-            $statement = self::$conn->prepare($sql);
+            $statement = $this->conn->prepare($sql);
             if (empty($data))
                 $query = $statement->execute();
             else
                 $query = $statement->execute($data);
         } catch (Exception $exception) {
             echo $exception->getMessage() . '<br/>';
-            echo '<b>SQL Query: '.$sql.'</b>';
+            echo '<b>SQL Query: ' . $sql . '</b>';
             die();
         }
         if ($status && $query)
             return $statement;
     }
 
+    public function fetch($status = true)
+    {
+        /**
+         * status = true - trả về tất cả bản ghi
+         * status = false - trả về một bản ghi
+         */
+        $this->sql =  $this->select . $this->table . $this->where;
+        $statement = $this->query($this->sql, [], true);
+        if (is_object($statement) && $status) :
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        else :
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
+        endif;
+        $this->where = null;
+        return $data;
+    }
+
     public static function table($tableName)
     {
         self::$_table = $tableName;
-        self::$conn;
+        self::$_select = "SELECT * FROM ";
+        return self::getInstance();
+    }
+
+    public function select($field)
+    {
+        self::$_select = "SELECT $field FROM ";
         return self::getInstance();
     }
 
     public function where($field, $operator, $value)
     {
-        $this->sql = "SELECT * FROM $this->table WHERE $field $operator '$value'";
+        $this->where = " WHERE $field $operator '$value'";
         return self::getInstance();
+    }
+
+    public function first()
+    {
+        return $this->fetch(false);
     }
 
     public function get()
     {
-        $statement = $this->query($this->sql, [], true);
-        if (is_object($statement)) :
-            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $data;
-        endif;
+        return $this->fetch();
     }
 }

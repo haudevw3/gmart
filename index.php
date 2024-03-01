@@ -6,7 +6,37 @@ require_once './core/Config/database.php';
 use Core\Build\DB;
 use Core\Build\Route;
 
-var_dump(DB::table('users')->where('username', '=', 'nguyenhau')->get());
+echo '<pre>';
+print_r(DB::table('categories')->get());
+echo '</pre>';
+
+echo '<pre>';
+print_r(DB::table('users')->where('username', '=', 'nguyenhau')->get());
+echo '</pre>';
+
+echo '<pre>';
+print_r(DB::table('categories')->get());
+echo '</pre>';
+
+echo '<pre>';
+print_r(DB::table('categories')->select('name, slug')->get());
+echo '</pre>';
+
+echo '<pre>';
+print_r(DB::table('users')->where('username', '=', 'nguyenhau')->get());
+echo '</pre>';
+
+echo '<pre>';
+print_r(DB::table('categoriess')->select('name, slug')->get());
+echo '</pre>';
+
+// echo '<pre>';
+// print_r(DB::table('categories')->select('name, slug')->get());
+// echo '</pre>';
+
+// var_dump(DB::table('users'));
+// echo '<br>';
+// var_dump(DB::table('categories'));
 
 
 // $route = new Route();

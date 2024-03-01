@@ -18,7 +18,6 @@ class DB
     private $conn = null;
 
     // Query builder
-    private $sql = null;
     private $table = null;
     private $select = null;
     private $where = null;
@@ -81,8 +80,8 @@ class DB
          * status = true - trả về tất cả bản ghi
          * status = false - trả về một bản ghi
          */
-        $this->sql =  $this->select . $this->table . $this->where;
-        $statement = $this->query($this->sql, [], true);
+        $sql =  $this->select . $this->table . $this->where;
+        $statement = $this->query($sql, [], true);
         if (is_object($statement) && $status) :
             $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         else :
@@ -99,9 +98,9 @@ class DB
         return self::getInstance();
     }
 
-    public function select($field)
+    public function select($fields)
     {
-        self::$_select = "SELECT $field FROM ";
+        self::$_select = "SELECT $fields FROM ";
         return self::getInstance();
     }
 
@@ -109,6 +108,33 @@ class DB
     {
         $this->where = " WHERE $field $operator '$value'";
         return self::getInstance();
+    }
+
+    public function insert($data = [])
+    {
+        $keys = array_keys($data);
+        $fields = implode(', ', $keys);
+        $values = ':' . implode(', :', array_values($keys));
+        $sql = "INSERT INTO $this->table ($fields) VALUES ($values)";
+        return $this->query($sql, $data);
+    }
+
+    public function update($data = [])
+    {
+        $fields = '';
+        foreach ($data as $key => $value)
+            $fields .= $key . '=:' . $key . ', ';
+        $fields = rtrim($fields, ', ');
+        $sql = "UPDATE $this->table SET $fields $this->where";
+        $this->where = null;
+        return $this->query($sql, $data);
+    }
+
+    public function delete()
+    {
+        $sql = "DELETE FROM $this->table $this->where";
+        $this->where = null;
+        return $this->query($sql);
     }
 
     public function first()

@@ -6,66 +6,17 @@ require_once './core/Config/database.php';
 use Core\Build\DB;
 use Core\Build\Route;
 
-echo '<pre>';
-print_r(DB::table('categories')->get());
-echo '</pre>';
+$data = [
+    'name' => 'Tủ lạnh 2',
+    'slug' => 'ti-vi',
+    'image' => 'test',
+    'parent_id' => 0
+];
 
-echo '<pre>';
-print_r(DB::table('users')->where('username', '=', 'nguyenhau')->get());
-echo '</pre>';
-
-echo '<pre>';
-print_r(DB::table('categories')->get());
-echo '</pre>';
-
-echo '<pre>';
-print_r(DB::table('categories')->select('name, slug')->get());
-echo '</pre>';
-
-echo '<pre>';
-print_r(DB::table('users')->where('username', '=', 'nguyenhau')->get());
-echo '</pre>';
-
-echo '<pre>';
-print_r(DB::table('categoriess')->select('name, slug')->get());
-echo '</pre>';
-
-// echo '<pre>';
-// print_r(DB::table('categories')->select('name, slug')->get());
-// echo '</pre>';
-
-// var_dump(DB::table('users'));
+// DB::table('categories')->where('name', '=', 'Tủ lạnh')->delete();
 // echo '<br>';
-// var_dump(DB::table('categories'));
 
-
-// $route = new Route();
-// $database = new Database();
-// $database1 = new Database();
-// var_dump($database);
-// var_dump($database1);
-// $controller = $route->getController();
-// $test = "App\\Http\\Controllers\\" . $controller;
-// $ob = new $test;
-
-// $app = new AppController();
-// $db = new Database();
-// $temp = $db->query("SELECT * FROM users", [], true);
-// $data = [
-//     "address" => "Ha Noi",
-//     "email" => "20nguyenhaukx@gmail.com"
-// ];
-// $db->insert("users", $data);
-// var_dump($db->insert("SELECT * FROM users", $data));
-// var_dump($db->update("SELECT * FROM users WHERE id = 3"));
-// $db->delete("users", ["id"=>3]);
-// if (!empty($_SERVER['PATH_INFO'])):
-//     $pathInfo = $_SERVER['PATH_INFO'];
-// else:
-//     $pathInfo = '/';
-// endif;
-
-// echo '<pre>';
-// print_r($_SERVER);
-// echo '</pre>';
+echo '<pre>';
+print_r(DB::table('categories')->get());
+echo '</pre>';
 

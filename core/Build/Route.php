@@ -1,69 +1,74 @@
 <?php
-
 namespace Core\Build;
 
 class Route
 {
-    private $url;
-    private $module;
-    private $controller;
-    private $action;
-    private $params;
+    private static $url;
+    private static $prefix;
+    private static $alias;
+    private static $instance = null;
 
     public function __construct()
     {
-        $this->url = $this->getUrl();
-        $this->controller = $this->getController();
-        $this->action = '';
-        $this->params = [];
-        $this->handleUrl();
     }
 
-    public function getUrl()
+    private static function getInstance()
+    {
+        if (self::$instance == NULL)
+            self::$instance = new Route();
+        return self::$instance;
+    }
+
+    private static function getUrl()
     {
         if (!empty($_SERVER['PATH_INFO'])) :
             $url = $_SERVER['PATH_INFO'];
         else :
-            $url = 'trang-chu';
+            $url = '/';
         endif;
         return $url;
     }
 
-    public function getController()
+    private static function getPrefix()
     {
-        global $routes;
-        $urlAnalysis = array_filter(explode('/', $this->url));
-        $urlAnalysis = array_values($urlAnalysis);
-        if (!empty($routes[$urlAnalysis[0]])) :
-            $this->module = $urlAnalysis[0];
-            $controller = $routes[$urlAnalysis[0]]['controller'];
-            unset($urlAnalysis[0]);
-            $this->url = implode('/', $urlAnalysis);
-            return $this->controller = $controller;
+        self::$url = self::getUrl();
+        $urlArray = array_filter(explode('/', self::$url));
+        $urlArray = array_values($urlArray);
+        if (!empty($urlArray[0])) :
+            $prefix = $urlArray[0];
         else :
-            $this->module = null;
-            $this->controller = null;
+            $prefix = null;
         endif;
-        return;
+        return $prefix;
     }
 
-    public function handleUrl()
+    public static function prefix($name, $callBack)
     {
-        global $routes;
-        $method = null;
-        if (!empty($this->module) && !empty($this->url) && !empty($routes[$this->module][$this->url])) :
-            $method = $routes[$this->module][$this->url]['method'];
-        endif;
-        if (!empty($this->module) && empty($this->url)) :
-            $method = $routes[$this->module]['method'];
-        endif;
-        if (!empty($method)) :
-            $namespace = ucfirst(implode('\\', explode('/', $routes[$this->module]['path'])));
-            $class = $namespace . $this->controller;
-            $this->controller = new $class;
-            $this->controller->$method();
+        self::$prefix = self::getPrefix();
+        if (self::$prefix == $name) :
+            $callBack();
         else :
             echo "Không tìm thấy tuyến đường";
         endif;
+        return self::getInstance();
+    }
+
+    public static function get($alias, $controller = [])
+    {
+        $url = self::$prefix . '/' . rtrim(ltrim($alias, '/'), '/');
+        self::$url = rtrim(ltrim(self::$url, '/'), '/');
+        if ($url == self::$url) :
+            $namespace = $controller[0];
+            $method = $controller[1];
+            $object = new $namespace();
+            if (method_exists($object, $method)) :
+                $object->$method();
+            else :
+                echo "Phương thức này không tồn tại";
+            endif;
+        else :
+            echo "Không tìm thấy tuyến đường";
+        endif;
+        return self::getInstance();
     }
 }

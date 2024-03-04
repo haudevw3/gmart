@@ -1,11 +1,8 @@
 <?php
-
 namespace Core\Build;
 
 use \PDO;
 use \Exception;
-
-// The singleton parttern
 
 class DB
 {
@@ -15,15 +12,15 @@ class DB
     private $pass = PASS;
     private $dbName = DB_NAME;
     private $drive = DRIVE;
-    private $conn = null;
+    private $conn;
 
     // Query builder
-    private $table = null;
-    private $select = null;
-    private $where = null;
+    private $table;
+    private $select;
+    private $where;
 
-    private static $_table = null;
-    private static $_select = null;
+    private static $_table;
+    private static $_select;
     private static $instance = null;
 
     private function __construct()
@@ -45,9 +42,9 @@ class DB
         $this->select = &self::$_select;
     }
 
-    public static function getInstance()
+    private static function getInstance()
     {
-        if (self::$instance == NULL)
+        if (self::$instance == null)
             self::$instance = new DB();
         return self::$instance;
     }
@@ -55,8 +52,8 @@ class DB
     public function query($sql, $data = [], $status = false)
     {
         /**
-         * status = true - trả về một Object PDO Statement
-         * gọi các phương thức của PDO để lấy dữ liệu
+         * status = true - return a Object PDO Statement
+         * call method of PDO get data
          */
         $query = null;
         try {
@@ -77,8 +74,8 @@ class DB
     public function fetch($status = true)
     {
         /**
-         * status = true - trả về tất cả bản ghi
-         * status = false - trả về một bản ghi
+         * status = true - return all record
+         * status = false - return a record
          */
         $sql =  $this->select . $this->table . $this->where;
         $statement = $this->query($sql, [], true);

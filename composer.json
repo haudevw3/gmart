@@ -6,7 +6,11 @@
         "psr-4": {
             "App\\": "app/",
             "Core\\": "core/"
-        }
+        },
+        "files": [
+            "./core/Config/routes.php",
+            "./core/Config/database.php"
+        ]
     },
     "require": {}
 }

@@ -9,11 +9,11 @@ class ProductController {
 
     public function index()
     {
-        echo "ProductController";
+        echo " index()";
     }
 
-    public function list()
+    public function add()
     {
-        echo "DetailProductController";
+        echo " add()";
     }
 }

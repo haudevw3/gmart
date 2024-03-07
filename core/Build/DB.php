@@ -1,4 +1,5 @@
 <?php
+
 namespace Core\Build;
 
 use \PDO;
@@ -44,8 +45,9 @@ class DB
 
     private static function getInstance()
     {
-        if (self::$instance == null)
+        if (self::$instance == null) :
             self::$instance = new DB();
+        endif;
         return self::$instance;
     }
 
@@ -58,10 +60,11 @@ class DB
         $query = null;
         try {
             $statement = $this->conn->prepare($sql);
-            if (empty($data))
+            if (empty($data)) :
                 $query = $statement->execute();
-            else
+            else :
                 $query = $statement->execute($data);
+            endif;
         } catch (Exception $exception) {
             echo $exception->getMessage() . '<br/>';
             echo '<b>SQL Query: ' . $sql . '</b>';

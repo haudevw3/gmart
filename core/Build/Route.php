@@ -1,4 +1,5 @@
 <?php
+
 namespace Core\Build;
 
 class Route
@@ -14,8 +15,9 @@ class Route
 
     private static function getInstance()
     {
-        if (self::$instance == NULL)
+        if (self::$instance == NULL) :
             self::$instance = new Route();
+        endif;
         return self::$instance;
     }
 
@@ -55,7 +57,11 @@ class Route
 
     public static function get($alias, $controller = [])
     {
-        $url = self::$prefix . '/' . rtrim(ltrim($alias, '/'), '/');
+        if (!empty(self::$prefix)) :
+            $url = self::$prefix . '/' . rtrim(ltrim($alias, '/'), '/');
+        else :
+            $url = rtrim(ltrim($alias, '/'), '/');
+        endif;
         self::$url = rtrim(ltrim(self::$url, '/'), '/');
         if ($url == self::$url) :
             $namespace = $controller[0];

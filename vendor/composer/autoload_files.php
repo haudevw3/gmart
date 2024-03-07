@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '0b4f95956dfc975bc9f382d5fd76a3a0' => $baseDir . '/core/Config/routes.php',
     '2a9dbf38fd92f7750e234fe668430ca3' => $baseDir . '/core/Config/database.php',
+    '371770326f2202269174df077110028c' => $baseDir . '/modules/user/routes.php',
 );

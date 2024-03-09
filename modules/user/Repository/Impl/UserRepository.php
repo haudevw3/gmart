@@ -8,6 +8,11 @@ use Modules\User\Repository\IUserRepository;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
+    protected function setTable()
+    {
+        return 'users';
+    }
+
     protected function setModel()
     {
         return User::class;

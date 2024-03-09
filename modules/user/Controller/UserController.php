@@ -3,6 +3,8 @@
 namespace Modules\User\Controller;
 
 use Core\Build\Controller;
+use Core\Build\Request;
+use Core\Build\Response;
 use Modules\User\Service\Impl\UserService;
 
 class UserController extends Controller
@@ -22,9 +24,15 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = [
-            'listUser' => $this->userService->findAll()
-        ];
-        return parent::view('index', $data);
+        $request = new Request();
+        $method = $request->isMethod('post');
+        // echo '<pre>';
+        // echo '</pre>';
+        $response = new Response();
+        $response->redirect();
+        // $data = [
+        //     'listUser' => $this->userService->listUser()
+        // ];
+        // return parent::view('index', $data);
     }
 }

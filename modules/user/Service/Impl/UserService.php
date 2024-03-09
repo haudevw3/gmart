@@ -18,6 +18,6 @@ class UserService extends BaseService implements IUserService
 
     public function listUser()
     {
-        return $this->baseRepo->findAll();
+        return $this->userRepo->findAll();
     }
 }

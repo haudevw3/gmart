@@ -8,8 +8,8 @@ class User extends Model
 {
     protected $table = 'users';
 
-    protected function setTable()
+    public function __construct()
     {
-        return $this->table;
+        parent::__construct($this->table);
     }
 }

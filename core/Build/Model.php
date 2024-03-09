@@ -2,26 +2,16 @@
 
 namespace Core\Build;
 
-abstract class Model extends DB
+// Eloquent ORM
+
+class Model extends DB
 {
-    private $db;
+    protected $db;
     protected $table;
 
-    public function __construct()
+    public function __construct($table = null)
     {
-        $this->table = $this->setTable();
-        $this->db = DB::table($this->table);
-    }
-
-    abstract protected function setTable();
-
-    public function all()
-    {
-        return $this->db->get();
-    }
-
-    public function first()
-    {
-        return $this->db->first();
+        $this->table = $table;
+        $this->db = DB::table($table);
     }
 }

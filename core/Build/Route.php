@@ -55,12 +55,12 @@ class Route
         return self::getInstance();
     }
 
-    public static function get($alias, $controller = [])
+    public static function get($uri, $controller = [])
     {
         if (!empty(self::$prefix)) :
-            $url = self::$prefix . '/' . rtrim(ltrim($alias, '/'), '/');
+            $url = self::$prefix . '/' . rtrim(ltrim($uri, '/'), '/');
         else :
-            $url = rtrim(ltrim($alias, '/'), '/');
+            $url = rtrim(ltrim($uri, '/'), '/');
         endif;
         self::$url = rtrim(ltrim(self::$url, '/'), '/');
         if ($url == self::$url) :

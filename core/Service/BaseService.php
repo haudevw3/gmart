@@ -10,9 +10,4 @@ class BaseService implements IBaseService
     {
         $this->baseRepo = $baseRepo;
     }
-
-    public function findAll()
-    {
-        return $this->baseRepo->findAll();
-    }
 }

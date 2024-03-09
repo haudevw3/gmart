@@ -19,6 +19,9 @@ class DB
     private $table;
     private $select;
     private $where;
+    private $andWhere;
+    private $orWhere;
+    private $orderBy;
 
     private static $_table;
     private static $_select;
@@ -74,13 +77,32 @@ class DB
             return $statement;
     }
 
+    public function buildQuery($condition = [], $sorted = [], $fields = [])
+    {
+        if (!empty($condition)) :
+            $this->where(array_keys($condition)[0], '=', array_values($condition)[0]);
+            unset($condition[array_keys($condition)[0]]);
+            foreach ($condition as $field => $value) :
+                $this->andWhere($field, '=', $value);
+            endforeach;
+        endif;
+        if (!empty($sorted)) :
+            $this->orderBy(array_keys($sorted)[0], array_values($sorted)[0]);
+        endif;
+        if (!empty($fields)) :
+            $this->select(implode(',', $fields));
+        endif;
+        return self::getInstance();
+    }
+
     public function fetch($status = true)
     {
         /**
          * status = true - return all record
          * status = false - return a record
          */
-        $sql =  $this->select . $this->table . $this->where;
+        $sql =  $this->select . $this->table . $this->where . $this->andWhere . $this->orWhere . $this->orderBy;
+        echo $sql;
         $statement = $this->query($sql, [], true);
         if (is_object($statement) && $status) :
             $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -88,6 +110,9 @@ class DB
             $data = $statement->fetch(PDO::FETCH_ASSOC);
         endif;
         $this->where = null;
+        $this->andWhere = null;
+        $this->orWhere = null;
+        $this->orderBy = null;
         return $data;
     }
 
@@ -107,6 +132,34 @@ class DB
     public function where($field, $operator, $value)
     {
         $this->where = " WHERE $field $operator '$value'";
+        return self::getInstance();
+    }
+
+    public function andWhere($field, $operator, $value)
+    {
+        $sql =  " AND $field $operator '$value'";
+        if (empty($this->andWhere)) :
+            $this->andWhere = $sql;
+        else :
+            $this->andWhere .= $sql;
+        endif;
+        return self::getInstance();
+    }
+
+    public function orWhere($field, $operator, $value)
+    {
+        $sql =  " OR $field $operator '$value'";
+        if (empty($this->andWhere)) :
+            $this->andWhere = $sql;
+        else :
+            $this->andWhere .= $sql;
+        endif;
+        return self::getInstance();
+    }
+
+    public function orderBy($field, $sort)
+    {
+        $this->orderBy = " ORDER BY $field $sort";
         return self::getInstance();
     }
 

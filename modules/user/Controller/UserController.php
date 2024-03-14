@@ -2,19 +2,17 @@
 
 namespace Modules\User\Controller;
 
-use Core\Build\Controller;
-use Core\Build\Request;
-use Core\Build\Response;
-use Modules\User\Service\Impl\UserService;
+use App\Http\Controllers\Controller;
+use Modules\User\Service\UserService;
 
 class UserController extends Controller
 {
     protected $module = 'user';
     protected $userService;
 
-    public function __construct()
+    public function __construct(UserService $userService)
     {
-        $this->userService = new UserService();
+        $this->userService = $userService;
     }
 
     protected function setModule()
@@ -24,15 +22,48 @@ class UserController extends Controller
 
     public function index()
     {
-        $request = new Request();
-        $method = $request->isMethod('post');
+        // var_dump($this->userService);
         // echo '<pre>';
+        // print_r($validated);
         // echo '</pre>';
-        $response = new Response();
-        $response->redirect();
-        // $data = [
-        //     'listUser' => $this->userService->listUser()
-        // ];
-        // return parent::view('index', $data);
+        // $request = new Request();
+        // $validated = $request->validate([
+        //     'username' => 'required|min:6|max:30|one',
+        //     'password' => 'required|min:6|max:30'
+        // ], [
+        //     'username' => 'Tên đăng nhập',
+        //     'password' => 'Mật khẩu'
+        // ]);
+        // if ($validated['isValidate']) :
+        //     return parent::view('index');
+        // else:
+        //     $data = [
+        //         'errors' => $validated
+        //     ];
+        //     parent::view('add', $data);
+        // endif;
+        return parent::view('index');
+    }
+
+    public function add()
+    {
+        // parent::view('add');
+        // $request = new Request();
+        // $validated = $request->validate([
+        //     'username' => 'required|min:6|max:30|one',
+        //     'password' => 'required|min:6|max:30'
+        // ], [
+        //     'username' => 'Tên đăng nhập',
+        //     'password' => 'Mật khẩu'
+        // ]);
+        // if ($validated['isValidate']) :
+        //     return parent::view('index');
+        // else:
+        //     $data = [
+        //         'errors' => $validated
+        //     ];
+        //     parent::view('add', $data);
+        // endif;
+        parent::view('add');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Modules\User\Service;
 
-interface IUserService
+interface UserService
 {
     public function listUser();
 }

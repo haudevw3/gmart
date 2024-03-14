@@ -1,14 +1,16 @@
 <?php
 
-namespace Core\Build;
+namespace App\Facades;
 
-class Response
+use App\Singletons\Singleton;
+
+class Response extends Singleton
 {
     public function __construct()
     {
     }
 
-    public function redirect($uri = '')
+    public static function redirect($uri = '')
     {
         if (preg_match('~^(http|https)~is', $uri)) :
             $url = $uri;

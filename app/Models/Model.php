@@ -1,6 +1,8 @@
 <?php
 
-namespace Core\Build;
+namespace App\Models;
+
+use App\Facades\DB;
 
 // Eloquent ORM
 

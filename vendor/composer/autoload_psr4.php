@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Modules\\User\\' => array($baseDir . '/modules/user'),
+    'Modules\\Categories\\' => array($baseDir . '/modules/categories'),
     'Core\\' => array($baseDir . '/core'),
     'App\\' => array($baseDir . '/app'),
 );

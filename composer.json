@@ -6,10 +6,12 @@
         "psr-4": {
             "App\\": "app/",
             "Core\\": "core/",
-            "Modules\\User\\": "modules/user/"
+            "Modules\\User\\": "modules/user/",
+            "Modules\\Categories\\": "modules/categories/"
         },
         "files": [
-            "./core/Config/database.php",
+            "./app/Configs/database.php",
+            "./app/Configs/regex.php",
             "./modules/user/routes.php"
         ]
     },

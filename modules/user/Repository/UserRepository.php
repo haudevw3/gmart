@@ -2,6 +2,6 @@
 
 namespace Modules\User\Repository;
 
-interface IUserRepository
+interface UserRepository
 {
 }

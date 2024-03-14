@@ -7,7 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit64f410b2f1fbc1b1ea0d4992f3114e3b
 {
     public static $files = array (
-        '2a9dbf38fd92f7750e234fe668430ca3' => __DIR__ . '/../..' . '/core/Config/database.php',
+        '917f89ff30b60fef9b2715942b4f7ab9' => __DIR__ . '/../..' . '/app/Configs/database.php',
+        '033e8da06ea97afc3fd59b2ff2d9098f' => __DIR__ . '/../..' . '/app/Configs/regex.php',
         '371770326f2202269174df077110028c' => __DIR__ . '/../..' . '/modules/user/routes.php',
     );
 
@@ -15,6 +16,7 @@ class ComposerStaticInit64f410b2f1fbc1b1ea0d4992f3114e3b
         'M' => 
         array (
             'Modules\\User\\' => 13,
+            'Modules\\Categories\\' => 19,
         ),
         'C' => 
         array (
@@ -30,6 +32,10 @@ class ComposerStaticInit64f410b2f1fbc1b1ea0d4992f3114e3b
         'Modules\\User\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/user',
+        ),
+        'Modules\\Categories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/categories',
         ),
         'Core\\' => 
         array (

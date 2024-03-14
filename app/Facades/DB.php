@@ -1,11 +1,12 @@
 <?php
 
-namespace Core\Build;
+namespace App\Facades;
 
+use App\Singletons\Singleton;
 use \PDO;
 use \Exception;
 
-class DB
+class DB extends Singleton
 {
     // Config host
     private $host = HOST;
@@ -25,9 +26,8 @@ class DB
 
     private static $_table;
     private static $_select;
-    private static $instance = null;
 
-    private function __construct()
+    protected function __construct()
     {
         try {
             if (class_exists('PDO')) :
@@ -44,14 +44,6 @@ class DB
         }
         $this->table = &self::$_table;
         $this->select = &self::$_select;
-    }
-
-    private static function getInstance()
-    {
-        if (self::$instance == null) :
-            self::$instance = new DB();
-        endif;
-        return self::$instance;
     }
 
     public function query($sql, $data = [], $status = false)
@@ -102,7 +94,6 @@ class DB
          * status = false - return a record
          */
         $sql =  $this->select . $this->table . $this->where . $this->andWhere . $this->orWhere . $this->orderBy;
-        echo $sql;
         $statement = $this->query($sql, [], true);
         if (is_object($statement) && $status) :
             $data = $statement->fetchAll(PDO::FETCH_ASSOC);

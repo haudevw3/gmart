@@ -1,6 +1,8 @@
 <?php
 
-namespace Core\Build;
+namespace App\Http\Requests;
+
+use App\Facades\Validator;
 
 class Request
 {
@@ -47,5 +49,25 @@ class Request
             $data = $this->filterInput($_POST, INPUT_POST);
         endif;
         return $data[$name];
+    }
+
+    public function validate($rules = [], $customFields = [])
+    {
+        if (!empty($rules)) :
+            foreach ($rules as $field => $rule) :
+                $ruleItems = explode('|', $rule);
+                foreach ($ruleItems as  $item) :
+                    $ruleItem = explode(':', $item);
+                    if (count($ruleItem) > 1) :
+                        $ruleArray[$field][$ruleItem[0]] = $ruleItem[1];
+                    else :
+                        $ruleArray[$field][$ruleItem[0]] = $ruleItem[0];
+                    endif;
+                endforeach;
+            endforeach;
+            $data = $this->all();
+            $validator = Validator::make($data, $ruleArray, $customFields);
+            return $validator;
+        endif;
     }
 }

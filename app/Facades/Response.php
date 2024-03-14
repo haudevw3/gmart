@@ -2,9 +2,7 @@
 
 namespace App\Facades;
 
-use App\Singletons\Singleton;
-
-class Response extends Singleton
+class Response
 {
     public function __construct()
     {

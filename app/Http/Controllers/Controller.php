@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 abstract class Controller
 {
     protected $module;
+    protected $request;
 
     public function __construct()
     {

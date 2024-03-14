@@ -2,14 +2,17 @@
 
 namespace App\Factories;
 
-use App\Singletons\Singleton;
 use Exception;
 
-class Factory extends Singleton
+class Factory
 {
     public $bindings = [];
     public $subClass = [];
     public $listService = [];
+
+    public function __construct()
+    {
+    }
 
     public function bind($interface, $className)
     {

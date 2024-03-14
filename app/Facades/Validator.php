@@ -2,9 +2,7 @@
 
 namespace App\Facades;
 
-use App\Singletons\Singleton;
-
-class Validator extends Singleton
+class Validator
 {
     public function __construct()
     {

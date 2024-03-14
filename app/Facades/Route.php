@@ -12,7 +12,6 @@ class Route extends Singleton
 
     public function __construct()
     {
-        // $this->listMethod['PATH_INFO'] = $this->getPathInfo();
     }
 
     public function getPathInfo()

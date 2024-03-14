@@ -3,17 +3,16 @@
 namespace App\Facades;
 
 use App\Factories\Factory;
-use App\Singletons\Singleton;
 use Modules\User\Provider as UserProvider;
 
-class Facade extends Singleton
+class Facade
 {
     private $factory;
     private $route;
 
     public function __construct()
     {
-        $this->factory = Factory::getInstance();
+        $this->factory = new Factory();
         $this->route = Route::getInstance();
     }
 

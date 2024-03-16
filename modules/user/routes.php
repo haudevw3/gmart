@@ -11,5 +11,5 @@ Route::prefix('thanh-vien', function () {
 Route::prefix('san-pham', function () {
     Route::post('danh-sach', [UserController::class, 'index'])->name('product');
     Route::get('them', [UserController::class, 'add'])->name('product-add');
-    Route::post('them', [UserController::class, 'add'])->name('product-add=s');
+    Route::post('them', [UserController::class, 'add'])->name('product-add-s');
 });

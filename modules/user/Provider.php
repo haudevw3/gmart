@@ -5,25 +5,34 @@ namespace Modules\User;
 use App\Providers\ServiceProvider;
 use Modules\User\Repository\Impl\UserRepositoryImpl;
 use Modules\User\Repository\UserRepository;
+use Modules\User\Service\CateService;
+use Modules\User\Service\Impl\CateServiceImpl;
 use Modules\User\Service\Impl\UserServiceImpl;
 use Modules\User\Service\UserService;
 
 class Provider extends ServiceProvider
 {
-    public function bindings()
+    /**
+     * Bootstrap the application Service.
+     *
+     * @return void
+     */
+    public function boot()
     {
-        return [
-            UserRepository::class => UserRepositoryImpl::class,
-            UserService::class => UserServiceImpl::class
-        ];
+        $this->loadModule('user');
+        $this->loadRoutesFrom('modules/user/routes.php');
+        $this->loadViewsFrom('modules/user/View');
     }
 
-    public function subClass()
+    /**
+     * Register the application Service.
+     *
+     * @return void
+     */
+    public function register()
     {
-        return [
-            UserServiceImpl::class => [
-                UserRepositoryImpl::class
-            ]
-        ];
+        $this->bindParams(UserRepository::class, UserRepositoryImpl::class);
+        $this->bindParams(UserService::class, UserServiceImpl::class);
+        $this->bindParams(CateService::class, CateServiceImpl::class);
     }
 }

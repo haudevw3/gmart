@@ -4,7 +4,7 @@ namespace App\Singletons;
 
 class Singleton
 {
-    protected static $instances = [];
+    public static $instances = [];
 
     protected function __construct()
     {

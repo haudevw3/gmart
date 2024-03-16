@@ -6,7 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '917f89ff30b60fef9b2715942b4f7ab9' => $baseDir . '/app/Configs/database.php',
-    '033e8da06ea97afc3fd59b2ff2d9098f' => $baseDir . '/app/Configs/regex.php',
-    '371770326f2202269174df077110028c' => $baseDir . '/modules/user/routes.php',
+    '8f13dbb929f6990a92361bbbd59ab313' => $baseDir . '/app/Configs/database.php',
+    '7aad9f6d7926766bc0aa43bd71b9acba' => $baseDir . '/app/Configs/regex.php',
+    '17a079fd18b0190a445365d028f2a483' => $baseDir . '/modules/user/routes.php',
 );

@@ -4,6 +4,10 @@ namespace App\Facades;
 
 class Session
 {
+    public function __construct()
+    {
+    }
+    
     public static function start()
     {
         $lifeTime = 3600;

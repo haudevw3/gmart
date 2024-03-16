@@ -4,8 +4,6 @@ namespace App\Models;
 
 use App\Facades\DB;
 
-// Eloquent ORM
-
 class Model extends DB
 {
     protected $db;

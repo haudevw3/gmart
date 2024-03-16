@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInit64f410b2f1fbc1b1ea0d4992f3114e3b
 {
     public static $files = array (
-        '917f89ff30b60fef9b2715942b4f7ab9' => __DIR__ . '/../..' . '/app/Configs/database.php',
-        '033e8da06ea97afc3fd59b2ff2d9098f' => __DIR__ . '/../..' . '/app/Configs/regex.php',
-        '371770326f2202269174df077110028c' => __DIR__ . '/../..' . '/modules/user/routes.php',
+        '8f13dbb929f6990a92361bbbd59ab313' => __DIR__ . '/../..' . '/app/Configs/database.php',
+        '7aad9f6d7926766bc0aa43bd71b9acba' => __DIR__ . '/../..' . '/app/Configs/regex.php',
+        '17a079fd18b0190a445365d028f2a483' => __DIR__ . '/../..' . '/modules/user/routes.php',
     );
 
     public static $prefixLengthsPsr4 = array (

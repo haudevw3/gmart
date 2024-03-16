@@ -10,9 +10,9 @@
             "Modules\\Categories\\": "modules/categories/"
         },
         "files": [
-            "./app/Configs/database.php",
-            "./app/Configs/regex.php",
-            "./modules/user/routes.php"
+            "app/Configs/database.php",
+            "app/Configs/regex.php",
+            "modules/user/routes.php"
         ]
     },
     "require": {}

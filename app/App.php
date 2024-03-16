@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Facades;
+namespace App;
 
-class Facade
+class App
 {
     public function __construct()
     {

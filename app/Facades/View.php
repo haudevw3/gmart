@@ -2,9 +2,13 @@
 
 namespace App\Facades;
 
-class Facade
+class View
 {
     public function __construct()
+    {
+    }
+
+    public static function make()
     {
     }
 }

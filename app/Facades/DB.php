@@ -3,8 +3,8 @@
 namespace App\Facades;
 
 use App\Singletons\Singleton;
-use \PDO;
-use \Exception;
+use PDO;
+use Exception;
 
 class DB extends Singleton
 {

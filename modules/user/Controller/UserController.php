@@ -14,7 +14,7 @@ class UserController extends Controller
     protected $module = 'user';
     protected $userService;
 
-    public function __construct(UserService $userService = null)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }

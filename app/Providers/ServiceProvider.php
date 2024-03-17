@@ -35,21 +35,22 @@ abstract class ServiceProvider
 
     public function loadRoutesFrom($path)
     {
-        $this->serviceContainer->listServiceProvider[$this->module]['loadRoutesFrom'] = $path;
+        $this->serviceContainer->serviceRegister[$this->module]['route'] = $path;
     }
 
     public function loadViewsFrom($path)
     {
-        $this->serviceContainer->listServiceProvider[$this->module]['loadViewsFrom'] = $path;
+        $this->serviceContainer->serviceRegister[$this->module]['view'] = $path;
     }
 
     public function bindParams($interface, $className)
     {
-        if (preg_match('/Repository/', $interface)) :
-            $this->serviceContainer->listServiceProvider[$this->module]['repository'][$interface] = $className;
-        endif;
-        if (preg_match('/Service/', $interface)) :
-            $this->serviceContainer->listServiceProvider[$this->module]['service'][$interface] = $className;
-        endif;
+        // if (preg_match('/Repository/', $interface)) :
+        //     $this->serviceContainer->serviceRegister[$this->module]['repository'][$interface] = $className;
+        // endif;
+        // if (preg_match('/Service/', $interface)) :
+        //     $this->serviceContainer->serviceRegister[$this->module]['service'][$interface] = $className;
+        // endif;
+        $this->serviceContainer->serviceRegister[$this->module]['dependencies'][$interface] = $className;
     }
 }

@@ -10,6 +10,7 @@ use ReflectionNamedType;
 class DIContainer extends Singleton
 {
     protected $bindings = [];
+    protected $instances = [];
 
     public function __construct()
     {
@@ -22,12 +23,18 @@ class DIContainer extends Singleton
 
     public function make($interface)
     {
+        if (isset($this->instances[$interface])) :
+            return $this->instances[$interface];
+        endif;
+
         if (isset($this->bindings[$interface])) :
             $className = $this->bindings[$interface];
             $reflector = new ReflectionClass($className);
             $constructor = $reflector->getConstructor();
             if ($constructor === null) :
-                return $reflector->newInstance();
+                $object = $reflector->newInstance();
+                $this->instances[$interface] = $object;
+                return $object;
             endif;
             $dependencies = [];
             $parameters = $constructor->getParameters();
@@ -39,7 +46,9 @@ class DIContainer extends Singleton
                     throw new Exception("Can't resolve dependency for {$parameter->getName()}");
                 endif;
             endforeach;
-            return $reflector->newInstanceArgs($dependencies);
+            $object = $reflector->newInstanceArgs($dependencies);
+            $this->instances[$interface] = $object;
+            return $object;
         endif;
     }
 }

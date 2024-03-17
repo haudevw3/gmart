@@ -5,8 +5,6 @@ namespace Modules\User;
 use App\Providers\ServiceProvider;
 use Modules\User\Repository\Impl\UserRepositoryImpl;
 use Modules\User\Repository\UserRepository;
-use Modules\User\Service\CateService;
-use Modules\User\Service\Impl\CateServiceImpl;
 use Modules\User\Service\Impl\UserServiceImpl;
 use Modules\User\Service\UserService;
 
@@ -33,6 +31,5 @@ class Provider extends ServiceProvider
     {
         $this->bindParams(UserRepository::class, UserRepositoryImpl::class);
         $this->bindParams(UserService::class, UserServiceImpl::class);
-        $this->bindParams(CateService::class, CateServiceImpl::class);
     }
 }

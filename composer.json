@@ -11,9 +11,11 @@
         },
         "files": [
             "app/Configs/database.php",
-            "app/Configs/regex.php",
             "modules/user/routes.php"
         ]
     },
-    "require": {}
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*"
+    }
 }

@@ -2,31 +2,37 @@
 
 namespace App\Providers;
 
+use App\Container\DIContainer;
 use App\Singletons\Singleton;
 
 class ServiceContainer extends Singleton
 {
-    public $listServiceProvider;
+    protected $DIContainer;
+    public $serviceRegister;
 
     public function __construct()
     {
+        $this->DIContainer = DIContainer::getInstance();
     }
 
-    public function getView($module)
+    public function loadViews()
     {
-        return $this->listServiceProvider[$module]['loadViewsFrom'];
     }
 
-    public function getRoute($module)
+    public function loadRoutes()
     {
-        return $this->listServiceProvider[$module]['loadRoutesFrom'];
     }
 
-    public function getRegisterClass($module)
+    public function loadControllers()
     {
-        $listServiceProvider = $this->listServiceProvider[$module];
-        unset($listServiceProvider['loadViewsFrom']);
-        unset($listServiceProvider['loadRoutesFrom']);
-        return $listServiceProvider;
+    }
+
+    public function loadDependencies()
+    {
+        $dependencies = $this->serviceRegister['user']['dependencies'];
+        foreach ($dependencies as $interface => $className) :
+            $this->DIContainer->bind($interface, $className);
+            $this->DIContainer->make($interface);
+        endforeach;
     }
 }

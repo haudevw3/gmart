@@ -2,19 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use App\Facades\Response;
 use App\Http\Requests\Request;
+use Closure;
 
 abstract class Middleware
 {
-    private $request;
-    private $response;
-
     public function __construct()
     {
-        $this->request = new Request();
-        $this->response = Response::getInstance();
     }
 
-    abstract public function handle();
+    abstract public function handle(Request $request, Closure $closure);
 }

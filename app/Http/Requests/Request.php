@@ -6,10 +6,22 @@ use App\Facades\Validator;
 
 class Request
 {
-    private $message;
+    protected $messages;
 
     public function __construct()
     {
+    }
+
+    public function getRequestInfo()
+    {
+        return [
+            'method' => $this->isMethod('get') ? 'get' : 'post',
+            'path_info' => ltrim(rtrim($_SERVER['PATH_INFO'], '/'), '/') ?? null,
+            'uri' => ltrim(rtrim($_SERVER['REQUEST_URI'], '/'), '/') ?? null,
+            'url' => $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?? null,
+            'query_string' => $_SERVER['QUERY_STRING'] ?? null,
+            'params' => $this->all()
+        ];
     }
 
     public function isMethod($method)
@@ -68,7 +80,7 @@ class Request
             endforeach;
             $data = $this->all();
             $validator = Validator::make($data, $ruleArray, $customFields);
-            $this->message = $validator;
+            $this->messages = $validator;
             return $validator;
         endif;
     }
@@ -80,7 +92,7 @@ class Request
 
     public function errors()
     {
-        foreach ($this->message as $field => $message) :
+        foreach ($this->messages as $field => $message) :
             if (is_array($message)) :
                 $errors[$field] = reset($message);
             endif;

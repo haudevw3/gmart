@@ -11,7 +11,6 @@ use Modules\User\Service\UserService;
 
 class UserController extends Controller
 {
-    protected $module = 'user';
     protected $userService;
 
     public function __construct(UserService $userService)
@@ -19,14 +18,10 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    protected function setModule()
-    {
-        return $this->module;
-    }
-
     public function index()
     {
-        // View::make();
+        return View::make('index');
+        // var_dump($view->view);
         // $request = new Request();
         // $validated = $request->validate([
         //     'username' => 'required|min:6|max:30|one',
@@ -49,11 +44,13 @@ class UserController extends Controller
         // echo '<pre>';
         // var_dump(Session::get('login'));
         // echo '</pre>';
+        // echo 'index';
     }
 
     public function add()
     {
         // Response::redirect('thanh-vien/danh-sach');
         // parent::view('add');
+        // echo 'add';
     }
 }

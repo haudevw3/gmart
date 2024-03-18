@@ -16,19 +16,14 @@ class Route extends Singleton
 
     public function resolveRouteFromRequest($requestInfo = [])
     {
-
-        // foreach ($this->listMethod as $key => $value) :
-        //     if ($value['url'] == $pathInfo) :
-        //         $value['routeName'] = $key;
-        //         return $value;
-        //     endif;
-        // endforeach;
-        echo '<pre>';
-        print_r($requestInfo);
-        echo '</pre>';
-        echo '<pre>';
-        print_r($this->routes);
-        echo '</pre>';
+        $pathInfoRequest = $requestInfo['path_info'];
+        $uriRequest = $requestInfo['uri'];
+        $queryStringRequest = $requestInfo['query_string'];
+        if (empty($queryStringRequest)) :
+            $route = $this->getRoute('path_info', $pathInfoRequest);
+            return $route;
+        else :
+        endif;
     }
 
     public static function resolveUrlByType($key, $uri)
@@ -55,22 +50,16 @@ class Route extends Singleton
         $uri = explode('/', $uri);
         $params = end($uri);
         if (preg_match($regex['clRegex'], $params)) :
-            $params = ltrim(rtrim($params, '}'), '{');
+            $params = trimBothEndsIfMatch($params, '{', '}');
             return count(explode(',', $params)) > 1 ? explode(',', $params) : $params;
         endif;
-    }
-
-    public static function prefix($name, $callBack)
-    {
-        self::$prefix = $name;
-        $callBack();
-        return self::getInstance();
     }
 
     private static function route($method, $uri, $controller = [])
     {
         self::$method = [
             'method' => $method,
+            'prefix' => self::$prefix,
             'path_info' => self::resolveUrlByType('pathInfo', $uri),
             'uri' => self::resolveUrlByType('uri', $uri),
             'params' => self::parseUriParams($uri),
@@ -79,6 +68,23 @@ class Route extends Singleton
                 'method' => $controller[1]
             ]
         ];
+        return self::getInstance();
+    }
+
+    private function getRoute($key, $value)
+    {
+        foreach ($this->routes as $routeName => $params) :
+            if ($params[$key] == $value) :
+                $params['routeName'] = $routeName;
+                return $params;
+            endif;
+        endforeach;
+    }
+
+    public static function prefix($name, $callBack)
+    {
+        self::$prefix = $name;
+        $callBack();
         return self::getInstance();
     }
 

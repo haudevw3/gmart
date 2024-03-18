@@ -16,8 +16,8 @@ class Request
     {
         return [
             'method' => $this->isMethod('get') ? 'get' : 'post',
-            'path_info' => ltrim(rtrim($_SERVER['PATH_INFO'], '/'), '/') ?? null,
-            'uri' => ltrim(rtrim($_SERVER['REQUEST_URI'], '/'), '/') ?? null,
+            'path_info' => trimBothEndsIfMatch($_SERVER['PATH_INFO'] ?? null, '/') ?? null,
+            'uri' => trimBothEndsIfMatch($_SERVER['REQUEST_URI'], '/') ?? null,
             'url' => $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?? null,
             'query_string' => $_SERVER['QUERY_STRING'] ?? null,
             'params' => $this->all()

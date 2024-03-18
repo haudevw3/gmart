@@ -17,7 +17,6 @@ class Provider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadModule('user');
         $this->loadRoutesFrom('modules/user/routes.php');
         $this->loadViewsFrom('modules/user/View');
     }

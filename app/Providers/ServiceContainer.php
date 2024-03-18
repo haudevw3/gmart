@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Container\DIContainer;
+use App\Facades\View;
 use App\Singletons\Singleton;
 
 class ServiceContainer extends Singleton
 {
     protected $DIContainer;
+    protected $view;
     public $serviceRegister;
 
     public function __construct()
@@ -15,21 +17,24 @@ class ServiceContainer extends Singleton
         $this->DIContainer = DIContainer::getInstance();
     }
 
-    public function loadViews()
+    public function loadViewPath()
     {
+        $viewPath = $this->serviceRegister['view'];
+        View::setViewPath($viewPath);
     }
 
-    public function loadRoutes()
+    public function loadController($className, $method)
     {
-    }
-
-    public function loadControllers()
-    {
+        $array = explode('\\', $className);
+        $interface = end($array) . 'Interface';
+        $this->DIContainer->bind($interface, $className);
+        $controller = $this->DIContainer->make($interface);
+        $controller->$method();
     }
 
     public function loadDependencies()
     {
-        $dependencies = $this->serviceRegister['user']['dependencies'];
+        $dependencies = $this->serviceRegister['dependencies'];
         foreach ($dependencies as $interface => $className) :
             $this->DIContainer->bind($interface, $className);
             $this->DIContainer->make($interface);

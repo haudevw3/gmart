@@ -11,5 +11,5 @@ abstract class Middleware
     {
     }
 
-    abstract public function handle(Request $request, Closure $closure);
+    abstract public function handle(Request $request, Closure $next);
 }

@@ -8,46 +8,45 @@ class Validator
     {
     }
 
-    public static function make($data = [], $rules = [], $customFields = [])
+    public static function make($data = [], $rules = [], $messages = [])
     {
         global $regex;
-        $messages = [];
-        $isValidate = 1;
+        $_messages = [];
+        $isValidated = 1;
         foreach ($rules as $field => $ruleItem) :
             foreach ($ruleItem as $key => $value) :
                 switch ($key) {
                     case 'required':
                         if (strlen($data[$field]) == 0) :
-                            $isValidate = 0;
-                            $messages[$field]['required'] = "$customFields[$field] không được bỏ trống";
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
                         endif;
                         break;
 
                     case 'min':
                         if (strlen($data[$field]) > 0 && strlen($data[$field]) < $value) :
-                            $isValidate = 0;
-                            $messages[$field]['min'] = "$customFields[$field] tối thiểu $value kí tự";
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
                         endif;
                         break;
 
                     case 'max':
                         if (strlen($data[$field]) > $value) :
-                            $isValidate = 0;
-                            $messages[$field]['max'] = 1;
-                            $messages[$field]['max'] = "$customFields[$field] tối đa $value kí tự";
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
                         endif;
                         break;
 
-                    case 'one':
-                        if (!preg_match($regex['one'], $data[$field])) :
-                            $isValidate = 0;
-                            $messages[$field]['one'] = "$customFields[$field] không hợp lệ";
+                    case 'alpha':
+                        if (!preg_match($regex['alpha'], $data[$field])) :
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
                         endif;
                         break;
                 }
             endforeach;
         endforeach;
-        $messages['isValidate'] = $isValidate;
-        return $messages;
+        $_messages['isValidated'] = $isValidated;
+        return $_messages;
     }
 }

@@ -18,10 +18,11 @@ class UserAuth extends Middleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $data = $request->all();
-        if ($data['username'] == 'vanhau' && $data['password'] == '123456'):
+        $username = $request->input('username');
+        $password = $request->input('password');
+        if (!empty($username) && !empty($password)) :
             return $next($request);
-        else:
+        else :
             return Response::redirect();
         endif;
     }

@@ -64,7 +64,7 @@ class Request
         return $data[$name];
     }
 
-    public function validate($rules = [], $customFields = [])
+    public function validate($rules = [], $messages = [])
     {
         if (!empty($rules)) :
             foreach ($rules as $field => $rule) :
@@ -79,7 +79,7 @@ class Request
                 endforeach;
             endforeach;
             $data = $this->all();
-            $validator = Validator::make($data, $ruleArray, $customFields);
+            $validator = Validator::make($data, $ruleArray, $messages);
             $this->messages = $validator;
             return $validator;
         endif;

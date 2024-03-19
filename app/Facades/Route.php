@@ -7,11 +7,22 @@ use App\Singletons\Singleton;
 class Route extends Singleton
 {
     private static $prefix;
+    private static $middleware;
     private static $method;
     protected $routes = [];
 
     public function __construct()
     {
+    }
+
+    private function getRoute($key, $value)
+    {
+        foreach ($this->routes as $routeName => $params) :
+            if ($params[$key] == $value) :
+                $params['routeName'] = $routeName;
+                return $params;
+            endif;
+        endforeach;
     }
 
     public function resolveRouteFromRequest($requestInfo = [])
@@ -26,19 +37,27 @@ class Route extends Singleton
         endif;
     }
 
-    public static function resolveUrlByType($key, $uri)
+    private static function resolveUrlByType($key, $uri)
     {
         global $regex;
         switch ($key) {
             case 'pathInfo':
                 if (preg_match($regex['urlRegex'], $uri, $matches)) :
-                    $pathInfo = self::$prefix . '/' . $matches[0];
+                    if (!empty(self::$prefix)) :
+                        $pathInfo = self::$prefix . '/' . $matches[0];
+                    else :
+                        $pathInfo = $matches[0];
+                    endif;
                     return $pathInfo;
                 endif;
                 break;
 
             case 'uri':
-                $uri = 'gmart/' . self::$prefix . '/' . $uri;
+                if (!empty(self::$prefix)) :
+                    $uri = 'gmart/' . (self::$prefix) . '/' . $uri;
+                else :
+                    $uri = 'gmart/' . $uri;
+                endif;
                 return $uri;
                 break;
         }
@@ -60,6 +79,7 @@ class Route extends Singleton
         self::$method = [
             'method' => $method,
             'prefix' => self::$prefix,
+            'middleware' => self::$middleware,
             'path_info' => self::resolveUrlByType('pathInfo', $uri),
             'uri' => self::resolveUrlByType('uri', $uri),
             'params' => self::parseUriParams($uri),
@@ -71,20 +91,23 @@ class Route extends Singleton
         return self::getInstance();
     }
 
-    private function getRoute($key, $value)
-    {
-        foreach ($this->routes as $routeName => $params) :
-            if ($params[$key] == $value) :
-                $params['routeName'] = $routeName;
-                return $params;
-            endif;
-        endforeach;
-    }
-
-    public static function prefix($name, $callBack)
+    public static function prefix($name)
     {
         self::$prefix = $name;
+        return self::getInstance();
+    }
+
+    public static function middleware($params = [])
+    {
+        self::$middleware = $params;
+        return self::getInstance();
+    }
+
+    public static function group($callBack)
+    {
         $callBack();
+        self::$prefix = null;
+        self::$middleware = null;
         return self::getInstance();
     }
 
@@ -100,6 +123,6 @@ class Route extends Singleton
 
     public function name($name)
     {
-        return $this->routes[$name] = self::$method;
+        $this->routes[$name] = self::$method;
     }
 }

@@ -7,9 +7,12 @@ use Closure;
 
 abstract class Middleware
 {
-    public function __construct()
-    {
-    }
-
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \App\Http\Requests\Request $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
     abstract public function handle(Request $request, Closure $next);
 }

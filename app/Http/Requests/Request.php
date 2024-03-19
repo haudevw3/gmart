@@ -44,7 +44,7 @@ class Request
         return $data;
     }
 
-    private function all()
+    public function all()
     {
         if ($this->isMethod('get')) :
             $data = $this->filterInput($_GET, INPUT_GET);
@@ -83,11 +83,6 @@ class Request
             $this->messages = $validator;
             return $validator;
         endif;
-    }
-
-    public function old()
-    {
-        return $this->all();
     }
 
     public function errors()

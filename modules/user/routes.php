@@ -3,7 +3,7 @@
 use App\Facades\Route;
 use Modules\User\Controller\UserController;
 
-Route::prefix('thanh-vien')->middleware('dang-nhap')->group(function () {
-    Route::get('danh-sach', [UserController::class, 'index'])->name('user-index');
-    Route::get('them', [UserController::class, 'add'])->name('user-add');
-});
+Route::get('dang-nhap', [UserController::class, 'login'])->name('login-page');
+Route::get('dang-ky', [UserController::class, 'register'])->name('register-page');
+Route::post('thong-tin-dang-nhap', [UserController::class, 'loginInfo'])->name('login-info');
+Route::post('thong-tin-dang-ky', [UserController::class, 'registerInfo'])->name('register-info');

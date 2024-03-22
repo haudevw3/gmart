@@ -2,27 +2,35 @@
 
 namespace App\Facades;
 
-class View
+use App\Singletons\Singleton;
+
+class View extends Singleton
 {
     protected static $viewPath;
 
-    public function __construct()
+    public static function make($fileName, $data = [])
     {
-    }
-
-    public static function make($view, $data = [])
-    {
-        $file = self::$viewPath . "/$view.php";
+        $file = self::$viewPath . "/desktop/$fileName.php";
         if (file_exists($file)) :
             extract($data);
             require_once $file;
         else :
-            echo "Không tìm thấy file: $view.php";
+            echo "Không tìm thấy file: $fileName.php";
         endif;
     }
 
     public static function setViewPath($viewPath)
     {
         self::$viewPath = $viewPath;
+    }
+
+    public static function getFilePath($fileName, $key = 'components')
+    {
+        switch ($key) {
+            case 'components':
+                $filePath = self::$viewPath . "/$key/$fileName.php";
+                return $filePath;
+                break;
+        }
     }
 }

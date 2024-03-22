@@ -12,10 +12,6 @@ class DIContainer extends Singleton
     protected $bindings = [];
     protected $instances = [];
 
-    public function __construct()
-    {
-    }
-
     public function bind($interface, $className)
     {
         $this->bindings[$interface] = $className;

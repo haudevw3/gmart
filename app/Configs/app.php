@@ -3,8 +3,10 @@
 use Core\Middleware\UserAuth;
 use Modules\User\Provider as UserProvider;
 
+const BASE_URL = 'http://localhost:8080/gmart';
+
 $providers = [
-    'thanh-vien' => UserProvider::class
+    'user' => UserProvider::class
 ];
 
 $auths = [

@@ -6,13 +6,10 @@ use App\Singletons\Singleton;
 
 class Response extends Singleton
 {
-    public function __construct()
-    {
-    }
-
     public static function redirect($uri = '')
     {
-        if (preg_match('~^(http|https)~is', $uri)) :
+        global $regex;
+        if (preg_match($regex['httpHttpsRegex'], $uri)) :
             $url = $uri;
         else :
             $url = 'http://localhost:8080/gmart/' . $uri;

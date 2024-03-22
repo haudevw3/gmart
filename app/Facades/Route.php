@@ -11,10 +11,6 @@ class Route extends Singleton
     private static $method;
     protected $routes = [];
 
-    public function __construct()
-    {
-    }
-
     private function getRoute($key, $value)
     {
         foreach ($this->routes as $routeName => $params) :
@@ -23,6 +19,15 @@ class Route extends Singleton
                 return $params;
             endif;
         endforeach;
+    }
+
+    public function getRouteByName($key)
+    {
+        if (isset($this->routes[$key])) :
+            return $this->routes[$key];
+        else :
+            echo "Không tìm thấy tên route: $key";
+        endif;
     }
 
     public function resolveRouteFromRequest($requestInfo = [])

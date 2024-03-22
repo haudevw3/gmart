@@ -1,0 +1,141 @@
+:root {
+    --color-white: #ffffff;
+    --color-red-one: #cd201f;
+    --color-blue-one: #384fa1;
+    --color-gray-one: #adb5bd;
+    --color-gray-two: #495057;
+    --font-family-light: 'Mulish-Light', var(--sans-serif), var(--monospace);
+    --font-family-regular: 'Mulish-Regular', var(--sans-serif), var(--monospace);
+    --font-family-medium: 'Mulish-Medium', var(--sans-serif), var(--monospace);
+    --sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@font-face {
+    font-family: 'Mulish-Light';
+    src: url('http://localhost:8080/gmart/public/fonts/Mulish-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mulish-Regular';
+    src: url('http://localhost:8080/gmart/public/fonts/Mulish-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mulish-Medium';
+    src: url('http://localhost:8080/gmart/public/fonts/Mulish-Medium.ttf') format('truetype');
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--font-family-regular) !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/*  */
+.form-control {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--color-gray-two) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--color-blue-one) !important;
+}
+
+.form-group {
+    position: relative !important;
+}
+
+.style-icon-one {
+    position: absolute !important;
+    left: 20px !important;
+    top: 16px !important;
+    font-size: 18px !important;
+    color: var(--color-gray-one) !important;
+}
+
+.style-input-one {
+    height: 60px !important;
+    line-height: 30px !important;
+    text-indent: 40px !important;
+    border-radius: 6px !important;
+    border: 2px #eee solid !important;
+}
+
+/*  */
+.vertical-center-items {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.horizontal-center-items {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.center-items {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/*  */
+.text-color-white {
+    color: var(--color-white) !important;
+}
+
+.text-color-red-one {
+    color: var(--color-red-one) !important;
+}
+
+.text-color-blue-one {
+    color: var(--color-blue-one) !important;
+}
+
+.text-color-gray-one {
+    color: var(--color-gray-one) !important;
+}
+
+.text-color-gray-two {
+    color: var(--color-gray-two) !important;
+}
+
+/*  */
+.text-link-one {
+    font-weight: 600 !important;
+    color: var(--color-blue-one) !important;
+}
+
+.text-title-one {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    font-family: var(--font-family-medium) !important;
+    color: var(--color-blue-one) !important;
+}
+
+/*  */
+.bg-color-red-one {
+    background-color: var(--color-red-one) !important;
+}
+
+.bg-color-blue-one {
+    background-color: var(--color-blue-one) !important;
+}
+
+/*  */
+.style-btn-one {
+    height: 60px !important;
+    line-height: 30px !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+    color: var(--color-white) !important;
+    font-family: var(--font-family-medium) !important;
+}

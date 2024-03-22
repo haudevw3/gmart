@@ -4,10 +4,6 @@ namespace App\Facades;
 
 class Validator
 {
-    public function __construct()
-    {
-    }
-
     public static function make($data = [], $rules = [], $messages = [])
     {
         global $regex;
@@ -38,7 +34,29 @@ class Validator
                         break;
 
                     case 'alpha':
-                        if (!preg_match($regex['alpha'], $data[$field])) :
+                        if (!preg_match($regex['alphaNumericRegex'], $data[$field])) :
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
+                        endif;
+                        break;
+
+                    case 'unique':
+                        $unique = DB::table($value)->where($field, '=', $data[$field])->first();
+                        if (!empty($unique)) :
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
+                        endif;
+                        break;
+
+                    case 'phone':
+                        if (!preg_match($regex['phoneRegex'], $data[$field])) :
+                            $isValidated = 0;
+                            $_messages[$field][$key] = $messages["$field.$key"];
+                        endif;
+                        break;
+
+                    case 'email':
+                        if (!preg_match($regex['gmailRegex'], $data[$field])) :
                             $isValidated = 0;
                             $_messages[$field][$key] = $messages["$field.$key"];
                         endif;

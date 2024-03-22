@@ -7,10 +7,6 @@ use Closure;
 
 abstract class Middleware
 {
-    public function __construct()
-    {
-    }
-    
     /**
      * Handle an incoming request.
      *

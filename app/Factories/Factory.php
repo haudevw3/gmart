@@ -9,10 +9,6 @@ class Factory extends Singleton
 {
     protected $bindings = [];
 
-    public function __construct()
-    {
-    }
-
     public function bind($interface, $className)
     {
         $this->bindings[$interface] = $className;

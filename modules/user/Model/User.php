@@ -10,6 +10,7 @@ class User extends Model
     protected $fillable = [
         'id',
         'ip',
+        'avatar',
         'fullname',
         'username',
         'password',
@@ -22,6 +23,7 @@ class User extends Model
     ];
     protected $attributes = [
         'ip' => '',
+        'avatar' => '',
         'fullname' => '',
         'username' => '',
         'password' => '',

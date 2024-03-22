@@ -8,10 +8,6 @@ class Request
 {
     protected $messages;
 
-    public function __construct()
-    {
-    }
-
     public function getRequestInfo()
     {
         return [
@@ -85,9 +81,9 @@ class Request
         endif;
     }
 
-    public function errors()
+    public function errors($validated)
     {
-        foreach ($this->messages as $field => $message) :
+        foreach ($validated as $field => $message) :
             if (is_array($message)) :
                 $errors[$field] = reset($message);
             endif;

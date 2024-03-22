@@ -45,5 +45,11 @@ abstract class BaseRepositoryImpl implements BaseRepository
 
     public function createOne($data = [])
     {
+        if (!empty($data)) :
+            DB::table($this->table)->insert($data);
+            return true;
+        else:
+            return false;
+        endif;
     }
 }

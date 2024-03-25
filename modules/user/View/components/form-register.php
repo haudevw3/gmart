@@ -6,28 +6,28 @@
             <form method="post" action="<?php echo route('register-info') ?>">
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-user"></i>
-                    <input type="text" class="form-control style-input-one <?php echo error('fullname') ? 'is-invalid' : 'is-valid'?>" name="fullname" placeholder="Họ và tên" value="<?php echo old('fullname') ?? old('fullname') ?>" required>
-                    <div class="<?php echo error('fullname') ? 'invalid-feedback' : 'valid-feedback'?>"><?php echo error('fullname') ?? error('fullname') ?></div>
+                    <input type="text" class="form-control style-input-one <?php echo error('fullname') ? 'is-invalid' : ''?>" name="fullname" placeholder="Họ và tên" value="<?php echo old('fullname') ?? old('fullname') ?>" required>
+                    <div class="invalid-feedback"><?php echo error('fullname') ?? error('fullname') ?></div>
                 </div>
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-user"></i>
-                    <input type="text" class="form-control style-input-one <?php echo error('username') ? 'is-invalid' : 'is-valid'?>" name="username" placeholder="Tên đăng nhập" value="<?php echo old('username') ?? old('username') ?>" required>
-                    <div class="<?php echo error('username') ? 'invalid-feedback' : 'valid-feedback'?>"><?php echo error('username') ?? error('username') ?></div>
+                    <input type="text" class="form-control style-input-one <?php echo error('username') ? 'is-invalid' : ''?>" name="username" placeholder="Tên đăng nhập" value="<?php echo old('username') ?? old('username') ?>" required>
+                    <div class="invalid-feedback"><?php echo error('username') ?? error('username') ?></div>
                 </div>
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-phone"></i>
-                    <input type="text" class="form-control style-input-one <?php echo error('phone') ? 'is-invalid' : 'is-valid'?>" name="phone" placeholder="Số điện thoại" value="<?php echo old('phone') ?? old('phone') ?>" required>
-                    <div class="<?php echo error('phone') ? 'invalid-feedback' : 'valid-feedback'?>"><?php echo error('phone') ?? error('phone') ?></div>
+                    <input type="text" class="form-control style-input-one <?php echo error('phone') ? 'is-invalid' : ''?>" name="phone" placeholder="Số điện thoại" value="<?php echo old('phone') ?? old('phone') ?>" required>
+                    <div class="invalid-feedback"><?php echo error('phone') ?? error('phone') ?></div>
                 </div>
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-envelope"></i>
-                    <input type="email" class="form-control style-input-one <?php echo error('email') ? 'is-invalid' : 'is-valid'?>" name="email" placeholder="Email" value="<?php echo old('email') ?? old('email') ?>" required>
-                    <div class="<?php echo error('email') ? 'invalid-feedback' : 'valid-feedback'?>"><?php echo error('email') ?? error('email') ?></div>
+                    <input type="email" class="form-control style-input-one <?php echo error('email') ? 'is-invalid' : ''?>" name="email" placeholder="Email" value="<?php echo old('email') ?? old('email') ?>" required>
+                    <div class="invalid-feedback"><?php echo error('email') ?? error('email') ?></div>
                 </div>
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-lock"></i>
-                    <input type="password" class="form-control style-input-one <?php echo error('password') ? 'is-invalid' : 'is-valid'?>" name="password" placeholder="Mật khẩu" value="<?php echo old('password') ?? old('password') ?>" required>
-                    <div class="<?php echo error('password') ? 'invalid-feedback' : 'valid-feedback'?>"><?php echo error('password') ?? error('password') ?></div>
+                    <input type="password" class="form-control style-input-one <?php echo error('password') ? 'is-invalid' : ''?>" name="password" placeholder="Mật khẩu" value="<?php echo old('password') ?? old('password') ?>" required>
+                    <div class="invalid-feedback"><?php echo error('password') ?? error('password') ?></div>
                 </div>
                 <div class="col-12 mb-3">
                     <button type="submit" class="col-12 btn style-btn-one bg-color-blue-one">Đăng ký</button>

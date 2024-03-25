@@ -71,8 +71,7 @@ class Route extends Singleton
     private static function parseUriParams($uri)
     {
         global $regex;
-        $uri = explode('/', $uri);
-        $params = end($uri);
+        $params = getLastElement($uri, '/');
         if (preg_match($regex['clRegex'], $params)) :
             $params = trimBothEndsIfMatch($params, '{', '}');
             return count(explode(',', $params)) > 1 ? explode(',', $params) : $params;

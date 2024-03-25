@@ -32,9 +32,8 @@ class UserController extends Controller
         return view('viewLogin', $data);
     }
 
-    public function loginInfo()
+    public function loginInfo(FormLogin $request)
     {
-        $request = new FormLogin();
         $validated = $request->validated();
         if ($validated['isValidated']) :
             $data = $request->all();
@@ -61,9 +60,8 @@ class UserController extends Controller
         return view('viewRegister', $data);
     }
 
-    public function registerInfo()
+    public function registerInfo(FormRegister $request)
     {
-        $request = new FormRegister();
         $validated = $request->validated();
         if ($validated['isValidated']) :
             $data = $request->all();

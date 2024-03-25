@@ -18,6 +18,22 @@ function trimBothEndsIfMatch($str, $leftFirstChar, $rightLastChar = '')
     endif;
 }
 
+function getLastElement($input, $delimiter = null)
+{
+    if (is_array($input) && count($input) > 0) :
+        return end($input);
+    elseif (is_string($input)) :
+        if ($delimiter === null) :
+            $array = explode(' ', $input);
+        else:
+            $array = explode($delimiter, $input);
+        endif;
+        return end($array);
+    else :
+        return null;
+    endif;
+}
+
 function view($fileName, $data = [])
 {
     $view = View::getInstance();

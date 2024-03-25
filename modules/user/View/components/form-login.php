@@ -3,15 +3,9 @@
     <div class="col-6 center-items">
         <div class="col-6 form-login">
             <div class="text-title-one mb-3">Đăng nhập</div>
-            <?php
-                if (error('message')) :
-                    ?>
-                        <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 mb-3">
-                            <?php echo error('message') ?>
-                        </div>
-                    <?php
-                endif;
-            ?>
+            <div class="<?php echo error('message') ? 'p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 mb-3' : '' ?>">
+                <?php echo error('message') ?? error('message') ?>
+            </div>
             <form method="post" action="<?php echo route('login-info') ?>">
                 <div class="form-group mb-3">
                     <i class="style-icon-one fa-regular fa-user"></i>

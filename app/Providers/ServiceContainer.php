@@ -25,11 +25,11 @@ class ServiceContainer extends Singleton
 
     public function loadController($className, $method)
     {
-        $array = explode('\\', $className);
-        $interface = end($array) . 'Interface';
+        $interface = getLastElement($className, '\\') . 'Interface';
         $this->DIContainer->bind($interface, $className);
         $controller = $this->DIContainer->make($interface);
-        $controller->$method();
+        $argsForMethod = $this->DIContainer->getArgumentsForMethod('object', $controller, $method);
+        $controller->$method(...$argsForMethod);
     }
 
     public function loadDependencies()
